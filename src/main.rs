@@ -5,11 +5,9 @@ use std::io::Write;
 use std::path::PathBuf;
 
 fn main() {
+    // create the window itself
     let app = app::App::default();
     let mut wind = Window::default().with_size(620, 130);
-    // Specify the folder path where you want to save the file.
-    // Replace "path/to/your/folder" with the actual path.
-    // Make sure to handle "~/" properly if you intend to use the home directory.
     let folder_path = "/home/mat/";
 
     let mut editor = MultilineInput::new(5, 5, 610, 390, "");
@@ -18,6 +16,7 @@ fn main() {
     wind.end();
     wind.show();
 
+    // this is necessary for transparency, for some reason
     let mut wind_clone = wind.clone();
     wind_clone.set_opacity(0.75);
 
@@ -41,6 +40,8 @@ fn main() {
         }
         _ => false,
     });
+
+    // send to ankiConnect
 
     app.run().unwrap();
 }
